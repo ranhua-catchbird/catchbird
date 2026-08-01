@@ -1,0 +1,16 @@
+{
+  "name": "鸟灵大师 - CatchBird",
+  "short_name": "鸟灵大师",
+  "description": "拍照识鸟 · 捕捉对战",
+  "start_url": "/catchbird/",
+  "display": "standalone",
+  "background_color": "#1A1A2E",
+  "theme_color": "#1A1A2E",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
