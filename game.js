@@ -307,10 +307,29 @@ class Game {
   setAIMode(mode, btn) { if (!this.player.settings) this.player.settings = {}; this.player.settings.aiMode = mode; birdAI.setMode(mode); this.save(); this.refreshSettings(); }
   saveName() { const input = document.getElementById('trainer-name-input'); if (!input) return; const n = input.value.trim(); if (n) { this.player.name = n; this.save(); this.toast('名称已保存'); this.refreshMainMenu(); } }
   clearSave() { if (confirm('确定清除所有存档？不可恢复！')) { localStorage.removeItem('birdmon_save'); localStorage.removeItem('birdmon_history'); localStorage.removeItem('birdmon_starter_chosen'); location.reload(); } }
-  toast(msg) { const c = document.getElementById('toast-container'); if (!c) return; const el = document.createElement('div'); el.className = 'toast'; el.textContent = msg; c.appendChild(el); setTimeout(() => { el.classList.add('out'); setTimeout(() => el.remove(), 300); }, 1500); }
+  toast(msg) { 
+    const c = document.getElementById('toast-container'); 
+    if (!c) return; 
+    const el = document.createElement('div'); 
+    el.className = 'toast'; 
+    el.textContent = msg; 
+    c.appendChild(el); 
+    setTimeout(() => { el.classList.add('out'); setTimeout(() => el.remove(), 300); }, 1500); 
+  }
 }
 
+// ===== 底部初始化代码（千万不要再加 // 注释了！） =====
 let game;
-function initGame() { try { game = new Game(); } catch (e) { console.error('Game init failed:', e); } }
-if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', initGame); } else { initGame(); }
-
+function initGame(){ 
+  try { 
+    game = new Game(); 
+  } catch (e) { 
+    console.error('Game init failed:', e); 
+    alert('游戏启动失败，请查看控制台报错');
+  } 
+}
+if (document.readyState === 'loading') { 
+  document.addEventListener('DOMContentLoaded', initGame); 
+} else { 
+  initGame(); 
+}
