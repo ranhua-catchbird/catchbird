@@ -1,312 +1,315 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="theme-color" content="#1A1A2E">
-    <title>鸟灵大师 - BirdMon</title>
-    <link rel="manifest" href="manifest.json">
-    <link rel="stylesheet" href="styles.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#1A1A2E">
+<title>鸟灵大师 - BirdMon</title>
+<link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/svg+xml" href="icon.svg">
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-<!-- ========== 加载画面 ========== -->
+<!-- 加载画面 -->
 <div id="loading-screen" class="loading-screen">
-    <div class="loading-content">
-        <div class="loading-bird">🐦</div>
-        <h1 class="loading-title">鸟灵大师</h1>
-        <p class="loading-sub">BirdMon Master</p>
-        <div class="loading-bar"><div class="loading-fill"></div></div>
-        <p class="loading-tip" id="loading-tip">正在唤醒鸟灵...</p>
-    </div>
+  <div class="loading-content">
+    <div class="loading-bird">🐦</div>
+    <h1 class="loading-title">鸟灵大师</h1>
+    <p class="loading-sub">BirdMon Master</p>
+    <div class="loading-bar"><div class="loading-fill"></div></div>
+    <p class="loading-tip" id="loading-tip">正在唤醒鸟灵...</p>
+  </div>
 </div>
 
-<!-- ========== 初始鸟灵选择 ========== -->
+<!-- 初始鸟灵选择弹窗 -->
 <div class="modal-overlay hidden" id="starter-modal">
-    <div class="modal-card starter-card">
-        <h3 style="margin-bottom:4px">🥚 选择你的初始鸟灵</h3>
-        <p style="font-size:12px;color:var(--text2);margin-bottom:14px">它将陪伴你踏上旅程</p>
-        <div class="starter-list" id="starter-list"></div>
-    </div>
+  <div class="modal-card starter-card">
+    <h3>🥚 选择你的初始鸟灵</h3>
+    <p class="starter-sub">它将陪伴你踏上旅程</p>
+    <div class="starter-list" id="starter-list"></div>
+  </div>
 </div>
 
-<!-- ========== 主菜单 ========== -->
+<!-- 主菜单 -->
 <div id="main-menu-screen" class="screen hidden">
-    <div class="menu-bg"></div>
-    <div class="menu-content">
-        <div class="game-title-wrap">
-            <span class="title-icon">🐦</span>
-            <span class="title-text">鸟灵大师</span>
-        </div>
-        <p class="game-subtitle">拍照识鸟 · 捕捉对战</p>
-        <div class="menu-buttons">
-            <button class="menu-btn primary" onclick="game.go('capture')">
-                <span class="btn-emoji">📸</span><span>拍照捉鸟</span>
-            </button>
-            <button class="menu-btn" onclick="game.go('team')">
-                <span class="btn-emoji">⚔️</span><span>我的队伍</span>
-                <span class="badge" id="team-badge">0/6</span>
-            </button>
-            <button class="menu-btn" onclick="game.go('battle-menu')">
-                <span class="btn-emoji">🏟️</span><span>开始对战</span>
-            </button>
-            <button class="menu-btn" onclick="game.go('pokedex')">
-                <span class="btn-emoji">📖</span><span>鸟灵图鉴</span>
-            </button>
-            <button class="menu-btn" onclick="game.go('bag')">
-                <span class="btn-emoji">🎒</span><span>道具背包</span>
-            </button>
-            <button class="menu-btn ghost" onclick="game.go('settings')">
-                <span class="btn-emoji">⚙️</span><span>设置</span>
-            </button>
-        </div>
-        <div class="player-bar">
-            <span class="player-avatar">🧑</span>
-            <span class="player-name" id="player-name">训练师</span>
-            <span class="player-stat">🏆 <span id="win-count">0</span></span>
-            <span class="player-stat">📸 <span id="capture-count">0</span></span>
-        </div>
+  <div class="menu-bg"></div>
+  <div class="menu-content">
+    <div class="game-title-wrap">
+      <span class="title-icon">🐦</span>
+      <span class="title-text">鸟灵大师</span>
     </div>
+    <p class="game-subtitle">拍照识鸟 · 捕捉对战</p>
+    <div class="menu-buttons">
+      <button class="menu-btn primary" onclick="game.go('capture')">
+        <span class="btn-emoji">📸</span><span>拍照捉鸟</span>
+      </button>
+      <button class="menu-btn" onclick="game.go('team')">
+        <span class="btn-emoji">⚔️</span><span>我的队伍</span>
+        <span class="badge" id="team-badge">0/6</span>
+      </button>
+      <button class="menu-btn" onclick="game.go('battle-menu')">
+        <span class="btn-emoji">🏟️</span><span>开始对战</span>
+      </button>
+      <button class="menu-btn" onclick="game.go('pokedex')">
+        <span class="btn-emoji">📖</span><span>鸟灵图鉴</span>
+      </button>
+      <button class="menu-btn" onclick="game.go('bag')">
+        <span class="btn-emoji">🎒</span><span>道具背包</span>
+      </button>
+      <button class="menu-btn" onclick="game.go('settings')">
+        <span class="btn-emoji">⚙️</span><span>设置</span>
+      </button>
+    </div>
+    <div class="player-bar">
+      <span class="player-avatar">🧑</span>
+      <span class="player-name" id="player-name">训练师</span>
+      <span class="player-stat">🏆 <span id="win-count">0</span></span>
+      <span class="player-stat">📸 <span id="capture-count">0</span></span>
+    </div>
+  </div>
 </div>
 
-<!-- ========== 捕捉画面 ========== -->
+<!-- 捕捉画面 -->
 <div id="capture-screen" class="screen hidden">
-    <div class="screen-header">
-        <button class="back-btn" onclick="game.go('main-menu')">← 返回</button>
-        <h2>📸 拍照捉鸟</h2>
-        <span class="header-tip" id="capture-boost-indicator"></span>
+  <div class="screen-header">
+    <button class="back-btn" onclick="game.go('main-menu')">← 返回</button>
+    <h2>📸 拍照捉鸟</h2>
+    <span class="header-tip" id="capture-boost-indicator"></span>
+  </div>
+  <div class="capture-body">
+    <div class="capture-tip-box">
+      <p>📷 拍一张鸟的照片或上传图片<br><small>AI 将识别并帮你捕捉它！</small></p>
     </div>
-    <div class="capture-body">
-        <div class="capture-tip-box">
-            <p>📷 拍一张鸟的照片或上传图片<br><small>AI 将识别并帮你捕捉它！</small></p>
+    <div class="upload-card" id="upload-card" onclick="game.triggerUpload()">
+      <input type="file" id="image-input" accept="image/*" capture="environment" hidden>
+      <div class="upload-placeholder" id="upload-placeholder">
+        <div class="upload-emoji">📷</div>
+        <p class="upload-title">点击拍照 / 上传图片</p>
+        <p class="upload-hint">支持 JPG / PNG · 最大 5MB</p>
+      </div>
+      <div class="upload-preview hidden" id="upload-preview">
+        <img id="preview-img" alt="预览">
+        <div class="preview-actions">
+          <button class="btn-small" onclick="event.stopPropagation();game.retake()">🔄 重拍</button>
+          <button class="btn-small primary" onclick="event.stopPropagation();game.identifyBird()">🔍 AI 识别</button>
         </div>
-        <div class="upload-card" id="upload-card" onclick="game.triggerUpload()">
-            <input type="file" id="image-input" accept="image/*" capture="environment" hidden>
-            <div class="upload-placeholder" id="upload-placeholder">
-                <div class="upload-emoji">📷</div>
-                <p class="upload-title">点击拍照 / 上传图片</p>
-                <p class="upload-hint">支持 JPG / PNG · 最大 5MB</p>
-            </div>
-            <div class="upload-preview hidden" id="upload-preview">
-                <img id="preview-img" alt="预览">
-                <div class="preview-actions">
-                    <button class="btn-small" onclick="event.stopPropagation();game.retake()">🔄 重拍</button>
-                    <button class="btn-small primary" onclick="event.stopPropagation();game.identifyBird()">🔍 AI 识别</button>
-                </div>
-            </div>
-        </div>
-        <div class="capture-result hidden" id="capture-result"></div>
-        <div class="history-section">
-            <h3>📜 最近识别</h3>
-            <div class="history-list" id="history-list">
-                <p class="empty-hint">还没有识别记录，快去拍第一张吧！</p>
-            </div>
-        </div>
+      </div>
     </div>
+    <div class="capture-result hidden" id="capture-result"></div>
+    <div class="history-section">
+      <h3>📜 最近识别</h3>
+      <div class="history-list" id="history-list">
+        <p class="empty-hint">还没有识别记录，快去拍第一张吧！</p>
+      </div>
+    </div>
+  </div>
 </div>
 
-<!-- ========== 队伍画面 ========== -->
+<!-- 队伍画面 -->
 <div id="team-screen" class="screen hidden">
-    <div class="screen-header">
-        <button class="back-btn" onclick="game.go('main-menu')">← 返回</button>
-        <h2>⚔️ 我的队伍</h2>
-        <span class="header-tip" id="team-hp-summary"></span>
+  <div class="screen-header">
+    <button class="back-btn" onclick="game.go('main-menu')">← 返回</button>
+    <h2>⚔️ 我的队伍</h2>
+    <span class="header-tip" id="team-hp-summary"></span>
+  </div>
+  <div class="team-body">
+    <div class="team-list" id="team-list"></div>
+    <div class="team-footer">
+      <button class="big-btn primary" id="goto-battle-btn" onclick="game.go('battle-menu')" disabled>🏟️ 去对战</button>
     </div>
-    <div class="team-body">
-        <div class="team-list" id="team-list"></div>
-        <div class="team-footer">
-            <button class="big-btn primary" id="goto-battle-btn" onclick="game.go('battle-menu')" disabled>
-                🏟️ 去对战
-            </button>
-        </div>
-    </div>
+  </div>
 </div>
 
-<!-- ========== 对战菜单 ========== -->
+<!-- 对战菜单 -->
 <div id="battle-menu-screen" class="screen hidden">
-    <div class="screen-header">
-        <button class="back-btn" onclick="game.go('main-menu')">← 返回</button>
-        <h2>🏟️ 选择对战</h2>
+  <div class="screen-header">
+    <button class="back-btn" onclick="game.go('main-menu')">← 返回</button>
+    <h2>🏟️ 选择对战</h2>
+  </div>
+  <div class="battle-menu-body">
+    <div class="battle-option" onclick="game.startBattle('wild')">
+      <div class="bo-icon">🌲</div>
+      <div class="bo-text"><h3>野外遭遇</h3><p>随机遇到野生鸟灵，可捕捉</p></div>
+      <div class="bo-arrow">›</div>
     </div>
-    <div class="battle-menu-body">
-        <div class="battle-option" onclick="game.startBattle('wild')">
-            <div class="bo-icon">🌲</div>
-            <div class="bo-text"><h3>野外遭遇</h3><p>随机遇到野生鸟灵，可捕捉</p></div>
-            <div class="bo-arrow">›</div>
-        </div>
-        <div class="battle-option" onclick="game.startBattle('trainer')">
-            <div class="bo-icon">🎓</div>
-            <div class="bo-text"><h3>训练师对战</h3><p>与 AI 训练师 1v1 切磋</p></div>
-            <div class="bo-arrow">›</div>
-        </div>
-        <div class="battle-option" onclick="game.startBattle('gym')">
-            <div class="bo-icon">👑</div>
-            <div class="bo-text"><h3>道馆挑战</h3><p>挑战强大的道馆馆主</p></div>
-            <div class="bo-arrow">›</div>
-        </div>
-        <div class="battle-tip">💡 提示：属性克制很关键！水克火、火克草、电克水...</div>
+    <div class="battle-option" onclick="game.startBattle('trainer')">
+      <div class="bo-icon">🎓</div>
+      <div class="bo-text"><h3>训练师对战</h3><p>与 AI 训练师 1v1 切磋</p></div>
+      <div class="bo-arrow">›</div>
     </div>
+    <div class="battle-option" onclick="game.startBattle('gym')">
+      <div class="bo-icon">👑</div>
+      <div class="bo-text"><h3>道馆挑战</h3><p>挑战强大的道馆馆主</p></div>
+      <div class="bo-arrow">›</div>
+    </div>
+    <div class="battle-tip">💡 提示：属性克制很关键！水克火、火克草、电克水...</div>
+  </div>
 </div>
 
-<!-- ========== 对战竞技场 ========== -->
+<!-- 对战竞技场 -->
 <div id="battle-arena-screen" class="screen hidden">
-    <div class="battle-arena" id="battle-arena">
-        <div class="battle-top-bar">
-            <span id="battle-mode-label">野外遭遇</span>
-            <button class="battle-quit" onclick="game.confirmQuitBattle()">✕</button>
-        </div>
-        <div class="battle-opponent">
-            <div class="opp-sprite-wrap">
-                <div class="opp-sprite" id="opp-sprite">🐦</div>
-                <div class="opp-shadow"></div>
-            </div>
-            <div class="opp-info-card">
-                <div class="opp-name-line">
-                    <span id="opp-name">野生鸟灵</span>
-                    <span class="opp-lv">Lv.<span id="opp-level">1</span></span>
-                </div>
-                <div class="hp-bar-wrap"><div class="hp-bar-fill" id="opp-hp-fill"></div></div>
-                <div class="hp-text" id="opp-hp-text">100 / 100</div>
-            </div>
-        </div>
-        <div class="battle-log" id="battle-log">
-            <div class="log-bubble">战斗开始！</div>
-        </div>
-        <div class="battle-player">
-            <div class="player-info-card">
-                <div class="player-name-line">
-                    <span id="player-bird-name">鸟灵</span>
-                    <span class="player-lv">Lv.<span id="player-bird-level">1</span></span>
-                </div>
-                <div class="hp-bar-wrap"><div class="hp-bar-fill player-hp-fill" id="player-hp-fill"></div></div>
-                <div class="hp-text" id="player-hp-text">100 / 100</div>
-                <div class="exp-bar-wrap"><div class="exp-bar-fill" id="player-exp-fill"></div></div>
-            </div>
-            <div class="player-sprite-wrap">
-                <div class="player-sprite" id="player-sprite">🐦</div>
-                <div class="player-shadow"></div>
-            </div>
-        </div>
-        <div class="battle-menu-bar" id="battle-menu-bar">
-            <button class="bm-btn attack" onclick="game.openMoves()"><span class="bm-emoji">⚡</span><span>技能</span></button>
-            <button class="bm-btn switch" onclick="game.openSwitch()"><span class="bm-emoji">🔄</span><span>切换</span></button>
-            <button class="bm-btn item" onclick="game.openBagInBattle()"><span class="bm-emoji">🧪</span><span>道具</span></button>
-            <button class="bm-btn run" onclick="game.runAway()"><span class="bm-emoji">💨</span><span>逃跑</span></button>
-        </div>
-        <div class="overlay-panel hidden" id="move-panel">
-            <div class="panel-header"><h3>选择技能</h3><button class="panel-close" onclick="game.closePanel('move-panel')">✕</button></div>
-            <div class="move-list" id="move-list"></div>
-        </div>
-        <div class="overlay-panel hidden" id="switch-panel">
-            <div class="panel-header"><h3>切换鸟灵</h3><button class="panel-close" onclick="game.closePanel('switch-panel')">✕</button></div>
-            <div class="switch-list" id="switch-list"></div>
-        </div>
-        <div class="overlay-panel hidden" id="bag-panel">
-            <div class="panel-header"><h3>使用道具</h3><button class="panel-close" onclick="game.closePanel('bag-panel')">✕</button></div>
-            <div class="bag-list" id="bag-list"></div>
-        </div>
-        <div class="result-modal hidden" id="battle-result-modal">
-            <div class="result-card-modal">
-                <div class="result-emoji" id="result-emoji">🎉</div>
-                <h2 id="result-title">胜利！</h2>
-                <div class="result-detail" id="result-detail"></div>
-                <button class="big-btn primary" onclick="game.endBattle()">确认</button>
-            </div>
-        </div>
+  <div class="battle-arena">
+    <div class="battle-top-bar">
+      <span id="battle-mode-label">野外遭遇</span>
+      <button class="battle-quit" onclick="game.confirmQuitBattle()">✕</button>
     </div>
+    <div class="battle-opponent">
+      <div class="opp-sprite-wrap">
+        <div class="opp-sprite" id="opp-sprite">🐦</div>
+        <div class="opp-shadow"></div>
+      </div>
+      <div class="opp-info-card">
+        <div class="opp-name-line">
+          <span id="opp-name">野生鸟灵</span>
+          <span class="opp-lv">Lv.<span id="opp-level">1</span></span>
+        </div>
+        <div class="hp-bar-wrap"><div class="hp-bar-fill" id="opp-hp-fill"></div></div>
+        <div class="hp-text" id="opp-hp-text">100 / 100</div>
+      </div>
+    </div>
+    <div class="battle-log" id="battle-log">
+      <div class="log-bubble">战斗开始！</div>
+    </div>
+    <div class="battle-player">
+      <div class="player-info-card">
+        <div class="player-name-line">
+          <span id="player-bird-name">鸟灵</span>
+          <span class="player-lv">Lv.<span id="player-bird-level">1</span></span>
+        </div>
+        <div class="hp-bar-wrap"><div class="hp-bar-fill player-hp-fill" id="player-hp-fill"></div></div>
+        <div class="hp-text" id="player-hp-text">100 / 100</div>
+        <div class="exp-bar-wrap"><div class="exp-bar-fill" id="player-exp-fill"></div></div>
+      </div>
+      <div class="player-sprite-wrap">
+        <div class="player-sprite" id="player-sprite">🐦</div>
+        <div class="player-shadow"></div>
+      </div>
+    </div>
+    <div class="battle-menu-bar">
+      <button class="bm-btn attack" onclick="game.openMoves()"><span class="bm-emoji">⚡</span><span>技能</span></button>
+      <button class="bm-btn switch" onclick="game.openSwitch()"><span class="bm-emoji">🔄</span><span>切换</span></button>
+      <button class="bm-btn item" onclick="game.openBagInBattle()"><span class="bm-emoji">🧪</span><span>道具</span></button>
+      <button class="bm-btn run" onclick="game.runAway()"><span class="bm-emoji">💨</span><span>逃跑</span></button>
+    </div>
+    <!-- 技能面板 -->
+    <div class="overlay-panel hidden" id="move-panel">
+      <div class="panel-header"><h3>选择技能</h3><button class="panel-close" onclick="game.closePanel('move-panel')">✕</button></div>
+      <div class="move-list" id="move-list"></div>
+    </div>
+    <!-- 切换面板 -->
+    <div class="overlay-panel hidden" id="switch-panel">
+      <div class="panel-header"><h3>切换鸟灵</h3><button class="panel-close" onclick="game.closePanel('switch-panel')">✕</button></div>
+      <div class="switch-list" id="switch-list"></div>
+    </div>
+    <!-- 背包面板 -->
+    <div class="overlay-panel hidden" id="bag-panel">
+      <div class="panel-header"><h3>使用道具</h3><button class="panel-close" onclick="game.closePanel('bag-panel')">✕</button></div>
+      <div class="bag-list" id="bag-list"></div>
+    </div>
+    <!-- 战斗结果 -->
+    <div class="result-modal hidden" id="battle-result-modal">
+      <div class="result-card-modal">
+        <div class="result-emoji" id="result-emoji">🎉</div>
+        <h2 id="result-title">胜利！</h2>
+        <div class="result-detail" id="result-detail"></div>
+        <button class="big-btn primary" onclick="game.endBattle()">确认</button>
+      </div>
+    </div>
+  </div>
 </div>
 
-<!-- ========== 图鉴 ========== -->
+<!-- 图鉴 -->
 <div id="pokedex-screen" class="screen hidden">
-    <div class="screen-header">
-        <button class="back-btn" onclick="game.go('main-menu')">← 返回</button>
-        <h2>📖 鸟灵图鉴</h2>
+  <div class="screen-header">
+    <button class="back-btn" onclick="game.go('main-menu')">← 返回</button>
+    <h2>📖 鸟灵图鉴</h2>
+  </div>
+  <div class="dex-body">
+    <div class="dex-stats-bar">
+      <div class="dex-stat"><b id="dex-captured">0</b><span>已捕捉</span></div>
+      <div class="dex-stat"><b id="dex-total">0</b><span>总数</span></div>
+      <div class="dex-stat"><b id="dex-rate">0%</b><span>完成率</span></div>
     </div>
-    <div class="dex-body">
-        <div class="dex-stats-bar">
-            <div class="dex-stat"><b id="dex-captured">0</b><span>已捕捉</span></div>
-            <div class="dex-stat"><b id="dex-total">0</b><span>总数</span></div>
-            <div class="dex-stat"><b id="dex-rate">0%</b><span>完成率</span></div>
-        </div>
-        <div class="dex-grid" id="dex-grid"></div>
-    </div>
+    <div class="dex-grid" id="dex-grid"></div>
+  </div>
 </div>
 
-<!-- ========== 背包 ========== -->
+<!-- 背包 -->
 <div id="bag-screen" class="screen hidden">
-    <div class="screen-header">
-        <button class="back-btn" onclick="game.go('main-menu')">← 返回</button>
-        <h2>🎒 道具背包</h2>
-    </div>
-    <div class="bag-body">
-        <div class="bag-list-full" id="bag_list_full"></div>
-    </div>
+  <div class="screen-header">
+    <button class="back-btn" onclick="game.go('main-menu')">← 返回</button>
+    <h2>🎒 道具背包</h2>
+  </div>
+  <div class="bag-body">
+    <div class="bag-list-full" id="bag-list_full"></div>
+  </div>
 </div>
 
-<!-- ========== 设置 ========== -->
+<!-- 设置 -->
 <div id="settings-screen" class="screen hidden">
-    <div class="screen-header">
-        <button class="back-btn" onclick="game.go('main-menu')">← 返回</button>
-        <h2>⚙️ 设置</h2>
+  <div class="screen-header">
+    <button class="back-btn" onclick="game.go('main-menu')">← 返回</button>
+    <h2>⚙️ 设置</h2>
+  </div>
+  <div class="settings-body">
+    <div class="setting-row">
+      <label>训练师名称</label>
+      <div class="setting-control">
+        <input type="text" id="trainer-name-input" placeholder="输入名称" maxlength="8">
+        <button class="btn-small primary" onclick="game.saveName()">保存</button>
+      </div>
     </div>
-    <div class="settings-body">
-        <div class="setting-row">
-            <label>训练师名称</label>
-            <div class="setting-control">
-                <input type="text" id="trainer-name-input" placeholder="输入名称" maxlength="8">
-                <button class="btn-small primary" onclick="game._saveName()">保存</button>
-            </div>
-        </div>
-        <div class="setting-row">
-            <label>音效</label>
-            <div class="toggle" id="toggle-sound" onclick="game.toggleSetting('sound')"><div class="toggle-knob"></div></div>
-        </div>
-        <div class="setting-row">
-            <label>震动反馈</label>
-            <div class="toggle" id="toggle-vibrate" onclick="game.toggleSetting('vibrate')"><div class="toggle-knob"></div></div>
-        </div>
-        <div class="setting-row">
-            <label>AI 识别模式</label>
-            <div class="seg-control" id="ai-mode">
-                <button class="seg-btn active" data-mode="simulate" onclick="game.setAIMode('simulate',this)">模拟</button>
-                <button class="seg-btn" data-mode="real" onclick="game.setAIMode('real',this)">真实API</button>
-            </div>
-        </div>
-        <div class="setting-row">
-            <label>清除存档</label>
-            <button class="btn-small danger" onclick="game.clearSave()">清除</button>
-        </div>
-        <div class="about-box">
-            <p><b>鸟灵大师 v1.1</b></p>
-            <p>拍照识鸟 → 捕捉 → 对战</p>
-            <p class="muted">当前为模拟 AI 模式</p>
-        </div>
+    <div class="setting-row">
+      <label>音效</label>
+      <div class="toggle on" id="toggle-sound" onclick="game.toggleSetting('sound')"><div class="toggle-knob"></div></div>
     </div>
+    <div class="setting-row">
+      <label>震动反馈</label>
+      <div class="toggle on" id="toggle-vibrate" onclick="game.toggleSetting('vibrate')"><div class="toggle-knob"></div></div>
+    </div>
+    <div class="setting-row">
+      <label>AI 识别模式</label>
+      <div class="seg-control" id="ai-mode">
+        <button class="seg-btn active" data-mode="simulate" onclick="game.setAIMode('simulate',this)">模拟</button>
+        <button class="seg-btn" data-mode="real" onclick="game.setAIMode('real',this)">真实API</button>
+      </div>
+    </div>
+    <div class="setting-row">
+      <label>清除存档</label>
+      <button class="btn-small danger" onclick="game.clearSave()">清除</button>
+    </div>
+    <div class="about-box">
+      <p><b>鸟灵大师 v1.2</b></p>
+      <p>拍照识鸟 → 捕捉 → 对战</p>
+      <p class="muted">当前为模拟 AI 模式</p>
+    </div>
+  </div>
 </div>
 
-<!-- ========== Toast ========== -->
+<!-- Toast 容器 -->
 <div class="toast-container" id="toast-container"></div>
 
-<!-- ========== 通用确认弹窗 ========== -->
+<!-- 通用确认弹窗 -->
 <div class="modal-overlay hidden" id="modal-overlay">
-    <div class="modal-card">
-        <h3 id="modal-title">确认</h3>
-        <p id="modal-msg"></p>
-        <div class="modal-actions">
-            <button class="btn-small" id="modal-cancel">取消</button>
-            <button class="btn-small primary" id="modal-ok">确认</button>
-        </div>
+  <div class="modal-card">
+    <h3 id="modal-title">确认</h3>
+    <p id="modal-msg"></p>
+    <div class="modal-actions">
+      <button class="btn-small" id="modal-cancel">取消</button>
+      <button class="btn-small primary" id="modal-ok">确认</button>
     </div>
+  </div>
 </div>
 
-<!-- ========== 鸟灵详情弹窗 ========== -->
+<!-- 鸟灵详情弹窗 -->
 <div class="modal-overlay hidden" id="bird-detail-modal">
-    <div class="modal-card bird-detail-card">
-        <button class="panel-close" onclick="game.closeModal('bird-detail-modal')">✕</button>
-        <div id="bird-detail-content"></div>
-    </div>
+  <div class="modal-card bird-detail-card">
+    <button class="panel-close" onclick="game.closeModal('bird-detail-modal')">✕</button>
+    <div id="bird-detail-content"></div>
+  </div>
 </div>
 
 <script src="game-data.js"></script>
